@@ -1080,7 +1080,7 @@ function viewSummary(){
   h+='<div><span class="lab">Next time</span><ul class="sum">'+sm.next.map(function(p){return '<li>'+esc(p)+'</li>'}).join('')+'</ul></div>';
   if(backupDue())h+='<div class="row" style="justify-content:space-between;border-top:1px solid var(--line);padding-top:12px"><span class="small mute">No backup in 2 weeks. Your log only lives on this phone.</span><button class="btn" data-act="bkfile">Save backup</button></div>';
   var ssx=S.sessions.filter(function(x){return x.ts===sm.ts})[0],sl2=ssx?svRow(ssx):'';
-  if(sl2)h+='<div id="svsum" style="border-top:1px solid var(--line);padding-top:12px;display:flex;flex-direction:column;gap:8px"><span class="lab">Strava</span><div class="row">'+sl2+'</div><span class="small mute">Copies your lifts and total. In Strava tap +, Manual activity, pick Weight Training, and paste it into the description.</span></div>';
+  if(sl2)h+='<div id="svsum" style="border-top:1px solid var(--line);padding-top:12px;display:flex;flex-direction:column;gap:8px"><span class="lab">Strava</span><div class="row">'+sl2+'</div><span class="small mute">Copies your lifts and total. Open Strava opens the app. Add a manual activity, pick Weight Training, and paste it into the description.</span></div>';
   h+='<button class="btn primary" data-act="closesum">Back to log</button></div>';
   return h;
 }
@@ -1227,7 +1227,15 @@ function viewHistory(){
 
 /* ---------- Strava (manual) ---------- */
 // Copies a ready-made summary of the session, then you paste it into a manual activity in Strava.
-var SV_MANUAL='https://www.strava.com/upload/manual';
+var SV_MANUAL='https://www.strava.com/upload/manual',SV_APP='strava://';
+// Open the Strava app through its own link type. If the app doesn't open within about 1.5 seconds (not installed), fall back to the website.
+function svOpen(){
+  var gone=false,t;
+  function hide(){if(document.hidden){gone=true;clearTimeout(t)}}
+  document.addEventListener('visibilitychange',hide);window.addEventListener('pagehide',hide);
+  t=setTimeout(function(){document.removeEventListener('visibilitychange',hide);if(!gone&&!document.hidden)window.open(SV_MANUAL,'_blank','noopener')},1500);
+  setTimeout(function(){document.removeEventListener('visibilitychange',hide)},4000);
+}
 function p2(n){return ('0'+n).slice(-2)}
 function svInfo(s){
   var es=(s.entries||[]).filter(function(e){return defOf(e.ex)}),vol=sessVol(s),lines=[];
@@ -1244,7 +1252,7 @@ function svCopy(ts){
 }
 function svRow(s){
   if(INFRAME)return '';
-  return '<button class="btn ghost" data-act="svcopy" data-v="'+s.ts+'">'+(S.ui.svCopied===s.ts?'Copied ✓':'Copy for Strava')+'</button><a class="btn ghost" href="'+SV_MANUAL+'" target="_blank" rel="noopener" style="text-decoration:none;display:inline-flex;align-items:center">Open Strava</a>';
+  return '<button class="btn ghost" data-act="svcopy" data-v="'+s.ts+'">'+(S.ui.svCopied===s.ts?'Copied ✓':'Copy for Strava')+'</button><a class="btn ghost" href="'+SV_APP+'" data-act="svopen" style="text-decoration:none;display:inline-flex;align-items:center">Open Strava</a>';
 }
 function render(){
   resetCache();
@@ -1386,6 +1394,7 @@ document.addEventListener('click',function(ev){
   else if(a==='unrem'){saveDraftNow();if(S.ui.removed)delete S.ui.removed[v];saveDraftNow();render();var uc=document.querySelector('.card[data-key="'+v+'"]');if(uc)window.scrollTo(0,Math.max(0,window.scrollY+uc.getBoundingClientRect().top-90))}
   else if(a==='autoorder'){saveDraftNow();S.ui.order=null;saveDraftNow();var sy15=window.scrollY;render();window.scrollTo(0,sy15);toast('Back to the automatic order.')}
   else if(a==='svcopy'){svCopy(v)}
+  else if(a==='svopen'){svOpen()}
   else if(a==='finish')finish();
   else if(a==='closesum'){S.ui.summary=null;render()}
   else if(a==='sel'){S.ui.sel=v;S.ui.pt=null;S.ui.tab='progress';render();if(el.classList.contains('li'))window.scrollTo(0,0)}
