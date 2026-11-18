@@ -273,6 +273,7 @@ var LIB=[
  {id:'adduct',name:'Adductor machine',day:'legs',kind:'load',inc:5,lo:8,hi:12,sets:3,opt:true,swap:true,note:'Groin strength, like the Copenhagen plank.'}
  ,{id:'larsen',name:'Larsen press',day:'push',kind:'load',inc:5,lo:6,hi:10,sets:3,opt:true,swap:true,note:'A bench press with your legs up on the bench, so there is no leg drive. Grip a little closer than usual and keep it smooth, 1 to 2 seconds down and up.'},
  {id:'incline',name:'Close-grip incline bench press',day:'push',kind:'load',inc:5,lo:5,hi:8,sets:3,opt:true,swap:true,note:'Grip just outside shoulder width and bring the bar to the top of your chest. Leans the work towards the upper chest.'},
+ {id:'idbpress',name:'Incline dumbbell press',day:'push',kind:'load',inc:2,lo:6,hi:10,sets:3,perHand:true,opt:true,swap:true,note:'Weight per hand. Bench at about 30°. Lower the dumbbells to the sides of your upper chest for a deep stretch, then press up and slightly in. Hits the upper chest more than flat pressing.'},
  {id:'cablefly',name:'Cable chest fly',day:'push',kind:'load',inc:1,lo:10,hi:15,sets:3,perHand:true,opt:true,swap:true,note:'Weight per side. Lean forward over the cables so they can\'t pull you off balance. Hold a 30 second chest stretch in the rest between sets.'},
  {id:'arnold',name:'Dumbbell Arnold press',day:'push',kind:'load',inc:2,lo:6,hi:10,sets:3,perHand:true,opt:true,swap:true,note:'Weight per hand. Start palms facing you, turn the elbows out as you press. Squeeze your glutes and load it like a real overhead press.'},
  {id:'yraise',name:'Cross-body cable Y-raise',day:'push',kind:'load',inc:1,lo:10,hi:15,sets:3,perHand:true,opt:true,swap:true,note:'Weight per side. Start with your hand across your body, then lift out and back on a diagonal, like drawing a sword. Don\'t let it turn into a front raise.'},
@@ -308,13 +309,13 @@ var TIME={
  ghr:{rest:120,work:30,pri:'rot'},hamcurl:{wu:1,rest:90,pri:'rot'},slrdl:{wu:1,rest:90,uni:true,pri:'rot'},hurdle:{rest:120,work:15,pri:'rot'},dbjump:{wu:1,rest:150,work:20,pri:'rot'},
  broad:{rest:90,work:15,pri:'rot'},bridge:{wu:2,rest:120,pri:'rot'},rdl:{wu:3,rest:150,pri:'rot'},revnordic:{rest:90,work:30,pri:'rot'},wallsit:{rest:60,work:45,pri:'rot',home:true},
  seatedcalf:{rest:60,pri:'rot'},adduct:{rest:60,pri:'rot'},
- larsen:{wu:2,rest:150},incline:{wu:3,rest:180},cablefly:{rest:75},arnold:{wu:2,rest:150},yraise:{rest:60,uni:true},xtri:{rest:60,uni:true},diamond:{rest:90},
+ larsen:{wu:2,rest:150},idbpress:{wu:2,rest:150},incline:{wu:3,rest:180},cablefly:{rest:75},arnold:{wu:2,rest:150},yraise:{rest:60,uni:true},xtri:{rest:60,uni:true},diamond:{rest:90},
  pullover:{wu:1,rest:90},preacher:{rest:75,uni:true},pausesquat:{wu:4,rest:180},lunge:{wu:1,rest:120,work:70},seatedcurl:{wu:1,rest:90},sldl:{wu:2,rest:120},toepress:{rest:60},platecrunch:{work:40,ss:true},
  hammer:{rest:90},ropehammer:{rest:75},legraise:{work:40,ss:true},abroll:{work:40,ss:true},cablecrunch:{work:40,ss:true},dragonflag:{work:30,ss:true},lsit:{work:25,ss:true},pallof:{work:40,uni:true,ss:true},hollow:{work:30,ss:true}
 };
 // <swaps> [alternative, weight ratio vs. the usual lift (null = no estimate), why]
 var SWAPS={
- dips:[['sbdips',0.9,'Same press, and it builds the top of the muscle-up'],['ringdips',0.6,'Harder to stabilise, so go lighter'],['cgbench',null,'Barbell option, triceps and chest like dips']],
+ dips:[['sbdips',0.9,'Same press, and it builds the top of the muscle-up'],['idbpress',null,'Dumbbell chest press, more upper chest'],['ringdips',0.6,'Harder to stabilise, so go lighter'],['cgbench',null,'Barbell option, triceps and chest like dips']],
  ohp:[['dbpress',0.4,'Same movement with dumbbells'],['lmpress',null,'Kinder angle if your shoulders feel cranky'],['machpress',null,'Machine option when the racks are busy'],['hspu',null,'Bodyweight overhead pressing']],
  pushdown:[['ohext',0.8,'Same triceps, stretched overhead'],['skull',null,'Free-weight option on a bench']],
  latraise:[['dblat',1.6,'Same exercise with dumbbells'],['machlat',null,'Machine version']],
@@ -361,7 +362,7 @@ function estMin(d,paired){
 // drop: when a session runs over time, the lowest number sits out first.
 var SLOTS={
  push:[
-  {id:'p_dips',name:'Chest & triceps',mode:'fixed',subs:[['dips','sbdips','ringdips','bench','cgbench','larsen','incline','cablefly']]},
+  {id:'p_dips',name:'Chest & triceps',mode:'fixed',subs:[['dips','sbdips','ringdips','bench','cgbench','larsen','incline','idbpress','cablefly']]},
   {id:'p_press',name:'Shoulders: press',mode:'fixed',subs:[['ohp','dbpress','lmpress','machpress','hspu','arnold']]},
   {id:'p_side',name:'Shoulders: side delts',mode:'rot',drop:2,subs:[['latraise','dblat','machlat','yraise']]},
   {id:'p_rear',name:'Shoulders: rear delts',mode:'rot',drop:3,subs:[['facepull','reversefly']]},
