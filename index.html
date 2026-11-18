@@ -94,6 +94,7 @@ input[type=date].in{font-size:var(--s2);font-weight:400}
 .btn.danger{background:var(--red);border-color:var(--red);color:#fff}
 .link{border:0;background:none;color:var(--navyT);min-height:44px;padding:8px 0;font-size:var(--s1);font-weight:700;text-transform:uppercase;letter-spacing:.06em;text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:1px}
 .swapbtn{white-space:nowrap}
+[hidden]{display:none!important}
 .cardtop{display:flex;justify-content:space-between;align-items:center;gap:8px;margin:-8px 0 -10px}
 .grip{border:1px solid var(--line);background:transparent;color:var(--ink);width:44px;height:40px;font-size:20px;line-height:1;touch-action:none;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;cursor:grab;flex:none}
 .reordering .card[data-ex]>*:not(.cardtop):not(.cardhead){display:none}
@@ -287,6 +288,64 @@ var LIB=[
  {id:'sldl',name:'Stiff-leg deadlift',day:'legs',kind:'load',inc:5,lo:6,hi:10,sets:3,opt:true,swap:true,note:'A deadlift with high hips and nearly straight knees, hinging at the hips. Start light, at about half your deadlift.'},
  {id:'toepress',name:'Leg press calf raise',day:'legs',kind:'load',inc:10,lo:10,hi:15,sets:3,opt:true,swap:true,note:'Calf raises on the leg press. Full stretch at the bottom. Toes straight ahead works the whole calf evenly.'},
  {id:'platecrunch',name:'Decline plate crunch',day:'abs',kind:'load',inc:2.5,lo:10,hi:12,sets:3,opt:true,note:'Hold a plate to your chest and curl your ribs towards your hips, letting your lower back round. Add a rep or a little weight over time like any other lift.'}
+ ,{id:'dbbench',name:'Flat dumbbell press',day:'push',kind:'load',inc:2,lo:6,hi:10,sets:3,perHand:true,note:'Weight per hand. Lower to the sides of your chest for a deep stretch, then press up and slightly in.',opt:true,swap:true}
+ ,{id:'machchest',name:'Machine chest press',day:'push',kind:'load',inc:5,lo:6,hi:10,sets:3,note:'Set the seat so the handles line up with mid-chest. Easy to push close to failure safely.',opt:true,swap:true}
+ ,{id:'pecdeck',name:'Pec deck fly',day:'push',kind:'load',inc:5,lo:10,hi:15,sets:3,note:'Slight bend in the elbows, let the chest stretch fully, squeeze at the middle.',opt:true,swap:true}
+ ,{id:'wpushup',name:'Weighted push-ups',day:'push',kind:'load',added:true,inc:5,lo:8,hi:15,sets:3,note:'A plate on your back, added weight only. Full range, chest to the floor.',opt:true,swap:true}
+ ,{id:'smithinc',name:'Smith machine incline press',day:'push',kind:'load',inc:5,lo:6,hi:10,sets:3,note:'Bench at about 30°, bar to the top of the chest. Log the plates you add.',opt:true,swap:true}
+ ,{id:'zpress',name:'Seated Z press',day:'push',kind:'load',inc:5,lo:5,hi:8,sets:3,note:'Sit on the floor, legs straight, no back support. Total bar weight. Very strict, so go lighter than a standing press.',opt:true,swap:true}
+ ,{id:'pushpress',name:'Push press',day:'push',kind:'load',inc:5,lo:3,hi:6,sets:3,note:'A small dip and drive with the legs, then press to lockout. Explosive, which suits jumping.',opt:true,swap:true}
+ ,{id:'smithohp',name:'Smith machine shoulder press',day:'push',kind:'load',inc:5,lo:6,hi:10,sets:3,note:'Seated. Log the plates you add.',opt:true,swap:true}
+ ,{id:'leanlat',name:'Lean-away cable lateral raise',day:'push',kind:'load',inc:1,lo:10,hi:15,sets:3,perHand:true,note:'Weight per side. Hold the post and lean away so the side delt is loaded from the very bottom.',opt:true,swap:true}
+ ,{id:'uprow',name:'Cable upright row',day:'push',kind:'load',inc:1,lo:10,hi:15,sets:3,note:'Wide grip, pull the elbows up and out to shoulder height, no higher.',opt:true,swap:true}
+ ,{id:'lyinglat',name:'Lying dumbbell lateral raise',day:'push',kind:'load',inc:2,lo:10,hi:15,sets:3,perHand:true,note:'Weight per hand, one arm at a time. Lie on your side on an incline bench. Hardest at the bottom, where the stretch is.',opt:true,swap:true}
+ ,{id:'rdfly',name:'Bent-over dumbbell rear delt fly',day:'push',kind:'load',inc:2,lo:10,hi:15,sets:3,perHand:true,note:'Weight per hand. Chest on an incline bench or hinge forward, arms out wide, lead with the elbows.',opt:true,swap:true}
+ ,{id:'cablerd',name:'Cross-cable rear delt fly',day:'push',kind:'load',inc:1,lo:10,hi:15,sets:3,perHand:true,note:'Weight per side. Cables crossed in front of you, pull out and back at shoulder height.',opt:true,swap:true}
+ ,{id:'jmpress',name:'JM press',day:'push',kind:'load',inc:5,lo:6,hi:10,sets:3,note:'Between a close-grip bench and a skull crusher. Lower the bar towards your chin, elbows forward. Heavy triceps work.',opt:true,swap:true}
+ ,{id:'dbkick',name:'Dumbbell tricep kickback',day:'push',kind:'load',inc:2,lo:10,hi:15,sets:3,perHand:true,note:'Weight per hand. Upper arm still and parallel to the floor, squeeze at full lockout.',opt:true,swap:true}
+ ,{id:'dbohext',name:'Overhead dumbbell tricep extension',day:'push',kind:'load',inc:2,lo:8,hi:12,sets:3,note:'One dumbbell in both hands behind your head. Big stretch at the bottom for the long head.',opt:true,swap:true}
+ ,{id:'benchdip',name:'Bench dips',day:'push',kind:'reps',lo:10,hi:20,sets:3,harder:'feet up on a second bench, then a plate on your lap',note:'Hands on a bench behind you. Keep your shoulders down and stop at about 90° elbow bend.',opt:true,swap:true}
+ ,{id:'sapd',name:'Single-arm cable pulldown',day:'pull',kind:'load',inc:1,lo:8,hi:12,sets:3,note:'Weight on the stack, reps per arm. Pull the elbow down to your hip and let the lat stretch fully at the top.',opt:true,swap:true}
+ ,{id:'straightarm',name:'Straight-arm pulldown',day:'pull',kind:'load',inc:1,lo:10,hi:15,sets:3,note:'Arms almost straight, sweep the bar or rope down to your thighs. Lats only, no biceps.',opt:true,swap:true}
+ ,{id:'wideneutral',name:'Wide-grip lat pulldown',day:'pull',kind:'load',inc:5,lo:8,hi:12,sets:3,note:'Hands just outside shoulder width at most; too wide shortens the range. Pull to the upper chest.',opt:true,swap:true}
+ ,{id:'sealrow',name:'Seal row',day:'pull',kind:'load',inc:5,lo:6,hi:10,sets:3,note:'Lie face down on a high bench and row a barbell or dumbbells. No cheating possible.',opt:true,swap:true}
+ ,{id:'meadows',name:'Meadows row',day:'pull',kind:'load',inc:5,lo:8,hi:12,sets:3,note:'One end of a landmine bar, stand side-on, row with an overhand grip. Log the plates on the bar end, reps per side.',opt:true,swap:true}
+ ,{id:'invrow',name:'Inverted row',day:'pull',kind:'reps',lo:8,hi:15,sets:3,harder:'feet on a bench, then a plate on your chest',note:'Under a bar or rings, body straight, pull your chest to the bar.',opt:true,swap:true}
+ ,{id:'machrow',name:'Machine row',day:'pull',kind:'load',inc:5,lo:8,hi:12,sets:3,note:'Chest on the pad, change grips between sets to hit the back from different angles.',opt:true,swap:true}
+ ,{id:'ksrow',name:'Kroc row',day:'pull',kind:'load',inc:2,lo:10,hi:20,sets:2,note:'Heavy single-arm dumbbell row for high reps, with straps and a little body English. Weight per dumbbell, reps per side.',opt:true,swap:true}
+ ,{id:'inclinecurl',name:'Incline dumbbell curl',day:'pull',kind:'load',inc:2,lo:8,hi:12,sets:3,perHand:true,note:'Weight per hand. Lie back on a 45° bench and let the arms hang behind you. Big stretch on the biceps.',opt:true,swap:true}
+ ,{id:'bayesian',name:'Bayesian cable curl',day:'pull',kind:'load',inc:1,lo:8,hi:12,sets:3,note:'Face away from a low cable, arm behind you. Weight on the stack, reps per arm. Loads the biceps at full stretch.',opt:true,swap:true}
+ ,{id:'dragcurl',name:'Barbell drag curl',day:'pull',kind:'load',inc:5,lo:8,hi:12,sets:3,note:'Elbows go back as you curl, bar slides up your body. Total bar weight.',opt:true,swap:true}
+ ,{id:'crosshammer',name:'Cross-body hammer curl',day:'pull',kind:'load',inc:2,lo:8,hi:12,sets:3,perHand:true,note:'Weight per hand. Curl across your body towards the opposite shoulder. Brachialis and forearm.',opt:true,swap:true}
+ ,{id:'revcurl',name:'Reverse-grip EZ curl',day:'pull',kind:'load',inc:5,lo:8,hi:12,sets:3,note:'Overhand grip. Forearms and brachialis, which helps grip on pull-ups and muscle-ups.',opt:true,swap:true}
+ ,{id:'wristcurl',name:'Wrist curl',day:'pull',kind:'load',inc:2,lo:12,hi:20,sets:2,perHand:true,note:'Weight per hand, forearms on your thighs. Stronger wrists help the false grip.',opt:true,swap:true}
+ ,{id:'shrug',name:'Dumbbell shrug',day:'pull',kind:'load',inc:2,lo:8,hi:15,sets:3,perHand:true,opt:true,note:'Weight per hand. Shoulders straight up to your ears, pause, lower slowly. Upper traps.'}
+ ,{id:'deadhang',name:'Dead hang',day:'pull',kind:'reps',ru:'s',rinc:5,lo:30,hi:60,sets:2,opt:true,harder:'one arm at a time, then add weight',note:'Seconds per hang. Grip strength and shoulder health for pull-ups and muscle-ups.'}
+ ,{id:'frontsquat',name:'Front squat',day:'legs',kind:'load',inc:5,lo:3,hi:6,sets:3,note:'Bar on the front of your shoulders, elbows high, upright torso. Very quad-heavy.',opt:true,swap:true}
+ ,{id:'smithsq',name:'Smith machine squat',day:'legs',kind:'load',inc:5,lo:5,hi:8,sets:3,note:'Feet slightly forward. Log the plates you add.',opt:true,swap:true}
+ ,{id:'gobletsq',name:'Goblet squat',day:'legs',kind:'load',inc:2,lo:8,hi:15,sets:3,note:'One dumbbell held at your chest. A lighter day option, good for depth.',opt:true,swap:true}
+ ,{id:'pistol',name:'Pistol squat',day:'legs',kind:'reps',lo:3,hi:8,sets:3,harder:'hold a light plate out in front',note:'Reps per leg. Hold onto something to start. Strong, controllable single-leg strength carries straight into jumping.',opt:true,swap:true}
+ ,{id:'cossack',name:'Cossack squat',day:'legs',kind:'reps',lo:6,hi:12,sets:3,harder:'hold a dumbbell at your chest',note:'Reps per side. Wide stance, sit down onto one leg with the other straight. Adductors and hip mobility.',opt:true,swap:true}
+ ,{id:'skater',name:'Skater squat',day:'legs',kind:'reps',lo:5,hi:10,sets:3,harder:'hold light dumbbells',note:'Reps per leg. Rear knee lowers to a pad behind you, front foot flat. Knee-friendly single-leg squat.',opt:true,swap:true}
+ ,{id:'goodmorning',name:'Good morning',day:'legs',kind:'load',inc:5,lo:6,hi:10,sets:3,note:'Bar on your back, soft knees, push the hips back until the hamstrings stretch. Start light.',opt:true,swap:true}
+ ,{id:'kbswing',name:'Kettlebell swing',day:'legs',kind:'load',inc:4,lo:10,hi:20,sets:3,note:'Hike the bell back, then snap the hips forward. Fast hip extension, like a jump.',opt:true,swap:true}
+ ,{id:'slcurl',name:'Single-leg leg curl',day:'legs',kind:'load',inc:2.5,lo:8,hi:12,sets:3,note:'Reps per leg. Evens out left and right.',opt:true,swap:true}
+ ,{id:'kickback',name:'Cable glute kickback',day:'legs',kind:'load',inc:1,lo:10,hi:15,sets:3,note:'Weight on the stack, reps per leg. Slight forward lean, drive the heel back.',opt:true,swap:true}
+ ,{id:'abduct',name:'Hip abduction machine',day:'legs',kind:'load',inc:5,lo:12,hi:20,sets:3,note:'Lean forward a little to bias the upper glutes. Helps keep the knees tracking on landings.',opt:true,swap:true}
+ ,{id:'slthrust',name:'Single-leg hip thrust',day:'legs',kind:'reps',lo:8,hi:15,sets:3,harder:'a dumbbell on your hip',note:'Reps per leg, back on a bench. Glute strength one side at a time, like a takeoff.',opt:true,swap:true}
+ ,{id:'standcalf',name:'Standing calf raise',day:'legs',kind:'load',inc:5,lo:8,hi:15,sets:3,note:'Straight knees, full stretch at the bottom with a pause, all the way up.',opt:true,swap:true}
+ ,{id:'legext',name:'Leg extension',day:'legs',kind:'load',inc:5,lo:10,hi:15,sets:3,note:'Both legs. 3 seconds down. Quads with little knee strain.',opt:true,swap:true}
+ ,{id:'poliquin',name:'Poliquin step-up',day:'legs',kind:'reps',lo:10,hi:15,sets:3,harder:'hold dumbbells',note:'Reps per leg. Heel raised on a small plate, knee travels over the toes. Builds the knee for jumping.',opt:true,swap:true}
+ ,{id:'tuck',name:'Tuck jumps',day:'legs',kind:'reps',lo:5,hi:10,sets:3,harder:'pause and stick the landing between reps',note:'Knees to chest, land soft and go again straight away.',opt:true,swap:true}
+ ,{id:'bounds',name:'Bounding',day:'legs',kind:'reps',lo:6,hi:10,sets:3,harder:'longer bounds, then single-leg hops',note:'Long, springy strides for distance. Reps are total bounds.',opt:true,swap:true}
+ ,{id:'slbox',name:'Single-leg box jump',day:'legs',kind:'height',unit:'cm',inc:5,lo:3,hi:5,sets:3,note:'Box height in cm, reps per leg. Take off from one leg, like a layup.',opt:true,swap:true}
+ ,{id:'medball',name:'Med ball overhead throw',day:'legs',kind:'reps',lo:4,hi:6,sets:3,harder:'a heavier ball',note:'Squat down, then throw the ball up and back over your head as high as you can. Whole-body power.',opt:true,swap:true}
+ ,{id:'crunchmach',name:'Ab crunch machine',day:'abs',kind:'load',inc:5,lo:8,hi:15,sets:3,note:'Curl the ribs down, don\'t just pull with the arms.',opt:true}
+ ,{id:'hangknee',name:'Hanging knee raise',day:'abs',kind:'reps',lo:8,hi:15,sets:3,harder:'straighten the legs',note:'No swing, curl the pelvis up at the top.',opt:true}
+ ,{id:'vup',name:'V-ups',day:'abs',kind:'reps',lo:8,hi:15,sets:3,harder:'hold a light plate',note:'Hands and feet meet over your hips, lower slowly.',opt:true}
+ ,{id:'deadbug',name:'Dead bug',day:'abs',kind:'reps',lo:8,hi:15,sets:3,harder:'hold a light plate, or a band overhead',note:'Reps per side. Lower back stays pressed into the floor the whole time.',opt:true}
+ ,{id:'sideplank',name:'Side plank',day:'abs',kind:'reps',ru:'s',rinc:5,lo:20,hi:45,sets:3,harder:'top leg raised, or a plate on your hip',note:'Seconds per side. Straight line from head to feet.',opt:true}
+ ,{id:'suitcase',name:'Suitcase carry',day:'abs',kind:'load',inc:2,lo:20,hi:40,sets:3,note:'One heavy dumbbell in one hand, walk without leaning. Reps are steps per side.',opt:true}
 ];
 var DAYS=['push','pull','legs'];
 // <time> Session length. Minutes = warm-up sets + sets x (work + rest); uni doubles work for one-side-at-a-time lifts.
@@ -309,7 +368,7 @@ var TIME={
  ghr:{rest:120,work:30,pri:'rot'},hamcurl:{wu:1,rest:90,pri:'rot'},slrdl:{wu:1,rest:90,uni:true,pri:'rot'},hurdle:{rest:120,work:15,pri:'rot'},dbjump:{wu:1,rest:150,work:20,pri:'rot'},
  broad:{rest:90,work:15,pri:'rot'},bridge:{wu:2,rest:120,pri:'rot'},rdl:{wu:3,rest:150,pri:'rot'},revnordic:{rest:90,work:30,pri:'rot'},wallsit:{rest:60,work:45,pri:'rot',home:true},
  seatedcalf:{rest:60,pri:'rot'},adduct:{rest:60,pri:'rot'},
- larsen:{wu:2,rest:150},idbpress:{wu:2,rest:150},incline:{wu:3,rest:180},cablefly:{rest:75},arnold:{wu:2,rest:150},yraise:{rest:60,uni:true},xtri:{rest:60,uni:true},diamond:{rest:90},
+ larsen:{wu:2,rest:150},dbbench:{wu:2,rest:150},machchest:{wu:1,rest:120},pecdeck:{rest:75},wpushup:{rest:90},smithinc:{wu:2,rest:150},zpress:{wu:2,rest:150},pushpress:{wu:3,rest:180},smithohp:{wu:1,rest:150},leanlat:{rest:60,uni:true},uprow:{rest:75},lyinglat:{rest:60,uni:true},rdfly:{rest:60},cablerd:{rest:60},jmpress:{wu:1,rest:120},dbkick:{rest:60},dbohext:{rest:75},benchdip:{rest:75},sapd:{rest:60,uni:true},straightarm:{rest:60},wideneutral:{wu:1,rest:120},sealrow:{wu:1,rest:120},meadows:{wu:1,rest:90,uni:true},invrow:{rest:90},machrow:{wu:1,rest:120},ksrow:{wu:1,rest:120,uni:true},inclinecurl:{rest:75},bayesian:{rest:60,uni:true},dragcurl:{rest:75},crosshammer:{rest:75},revcurl:{rest:75},wristcurl:{rest:45},shrug:{rest:60},deadhang:{rest:60,work:45},frontsquat:{wu:4,rest:180},smithsq:{wu:3,rest:150},gobletsq:{wu:1,rest:90},pistol:{rest:90,uni:true},cossack:{rest:75,uni:true},skater:{rest:90,uni:true},goodmorning:{wu:2,rest:120},kbswing:{rest:90},slcurl:{rest:60,uni:true},kickback:{rest:45,uni:true},abduct:{rest:60},slthrust:{rest:60,uni:true},standcalf:{rest:60},legext:{rest:60},poliquin:{rest:60,uni:true},tuck:{rest:90,work:15},bounds:{rest:120,work:15},slbox:{rest:90,work:20,uni:true},medball:{rest:90,work:15},crunchmach:{work:40,ss:true},hangknee:{work:35,ss:true},vup:{work:30,ss:true},deadbug:{work:40,ss:true},sideplank:{work:60,ss:true},suitcase:{work:50,ss:true},idbpress:{wu:2,rest:150},incline:{wu:3,rest:180},cablefly:{rest:75},arnold:{wu:2,rest:150},yraise:{rest:60,uni:true},xtri:{rest:60,uni:true},diamond:{rest:90},
  pullover:{wu:1,rest:90},preacher:{rest:75,uni:true},pausesquat:{wu:4,rest:180},lunge:{wu:1,rest:120,work:70},seatedcurl:{wu:1,rest:90},sldl:{wu:2,rest:120},toepress:{rest:60},platecrunch:{work:40,ss:true},
  hammer:{rest:90},ropehammer:{rest:75},legraise:{work:40,ss:true},abroll:{work:40,ss:true},cablecrunch:{work:40,ss:true},dragonflag:{work:30,ss:true},lsit:{work:25,ss:true},pallof:{work:40,uni:true,ss:true},hollow:{work:30,ss:true}
 };
@@ -362,31 +421,31 @@ function estMin(d,paired){
 // drop: when a session runs over time, the lowest number sits out first.
 var SLOTS={
  push:[
-  {id:'p_dips',name:'Chest & triceps',mode:'fixed',subs:[['dips','sbdips','ringdips','bench','cgbench','larsen','incline','idbpress','cablefly']]},
-  {id:'p_press',name:'Shoulders: press',mode:'fixed',subs:[['ohp','dbpress','lmpress','machpress','hspu','arnold']]},
-  {id:'p_side',name:'Shoulders: side delts',mode:'rot',drop:2,subs:[['latraise','dblat','machlat','yraise']]},
-  {id:'p_rear',name:'Shoulders: rear delts',mode:'rot',drop:3,subs:[['facepull','reversefly']]},
-  {id:'p_tri',name:'Triceps',mode:'rot',drop:1,subs:[['pushdown','ohext','skull','xtri','diamond']]}
+  {id:'p_dips',name:'Chest & triceps',mode:'fixed',subs:[['dips','sbdips','ringdips','bench','cgbench','larsen','incline','idbpress','cablefly','dbbench','machchest','pecdeck','wpushup','smithinc']]},
+  {id:'p_press',name:'Shoulders: press',mode:'fixed',subs:[['ohp','dbpress','lmpress','machpress','hspu','arnold','zpress','pushpress','smithohp']]},
+  {id:'p_side',name:'Shoulders: side delts',mode:'rot',drop:2,subs:[['latraise','dblat','machlat','yraise','leanlat','uprow','lyinglat']]},
+  {id:'p_rear',name:'Shoulders: rear delts',mode:'rot',drop:3,subs:[['facepull','reversefly','rdfly','cablerd']]},
+  {id:'p_tri',name:'Triceps',mode:'rot',drop:1,subs:[['pushdown','ohext','skull','xtri','diamond','jmpress','dbkick','dbohext','benchdip']]}
  ],
  pull:[
   {id:'l_mu',name:'Muscle-up skill',mode:'fixed',subs:[['muscleup']]},
-  {id:'l_vert',name:'Back: vertical pull',mode:'fixed',subs:[['pullup','chinup','ngpull','latpd','pullover']]},
-  {id:'l_row',name:'Back: row',mode:'rot',subs:[['tbar','narrow','pendlay','cablerow','csrow','sadrow']]},
-  {id:'l_curl',name:'Biceps: curl',mode:'rot',drop:2,subs:[['dbcurl','ezcurl','cablecurl','curlmach','preacher']]},
-  {id:'l_hammer',name:'Biceps: hammer',mode:'rot',drop:1,subs:[['spider','hammer','ropehammer']]}
+  {id:'l_vert',name:'Back: vertical pull',mode:'fixed',subs:[['pullup','chinup','ngpull','latpd','pullover','sapd','straightarm','wideneutral']]},
+  {id:'l_row',name:'Back: row',mode:'rot',subs:[['tbar','narrow','pendlay','cablerow','csrow','sadrow','sealrow','meadows','invrow','machrow','ksrow']]},
+  {id:'l_curl',name:'Biceps: curl',mode:'rot',drop:2,subs:[['dbcurl','ezcurl','cablecurl','curlmach','preacher','inclinecurl','bayesian','dragcurl']]},
+  {id:'l_hammer',name:'Biceps: hammer',mode:'rot',drop:1,subs:[['spider','hammer','ropehammer','crosshammer','revcurl','wristcurl']]}
  ],
  legs:[
   {id:'g_test',name:'Jump test',mode:'fixed',subs:[['vjump']]},
   {id:'g_app',name:'Jumps: approach',mode:'fixed',subs:[['ajump']]},
-  {id:'g_plyo',name:'Jumps: plyometrics',mode:'rot',subs:[['depth','tbjump','box','hurdle','pogo','dbjump','broad']]},
-  {id:'g_quad',name:'Quads: main squat',mode:'fixed',subs:[['hack','squat','legpress','beltsquat','pendsquat','pausesquat']]},
-  {id:'g_single',name:'Single leg',mode:'fixed',subs:[['bss','revlunge','stepup','lunge']]},
-  {id:'g_ham',name:'Hamstrings',mode:'fixed',subs:[['nordic','ghr','hamcurl','slrdl','seatedcurl','sldl']]},
-  {id:'g_acc',name:'Glutes, or knees & calves',mode:'rot',drop:1,subs:[['thrust','tbdl','rdl','bridge'],['calf','spanish','sle','copen','tib','revnordic','wallsit','seatedcalf','adduct','toepress']]}
+  {id:'g_plyo',name:'Jumps: plyometrics',mode:'rot',subs:[['depth','tbjump','box','hurdle','pogo','dbjump','broad','tuck','bounds','slbox','medball']]},
+  {id:'g_quad',name:'Quads: main squat',mode:'fixed',subs:[['hack','squat','legpress','beltsquat','pendsquat','pausesquat','frontsquat','smithsq','gobletsq']]},
+  {id:'g_single',name:'Single leg',mode:'fixed',subs:[['bss','revlunge','stepup','lunge','pistol','cossack','skater']]},
+  {id:'g_ham',name:'Hamstrings',mode:'fixed',subs:[['nordic','ghr','hamcurl','slrdl','seatedcurl','sldl','goodmorning','kbswing','slcurl']]},
+  {id:'g_acc',name:'Glutes, or knees & calves',mode:'rot',drop:1,subs:[['thrust','tbdl','rdl','bridge','kickback','abduct','slthrust'],['calf','spanish','sle','copen','tib','revnordic','wallsit','seatedcalf','adduct','toepress','standcalf','legext','poliquin']]}
  ],
  abs:[
-  {id:'a_flex',name:'Abs: flexion',mode:'rot',subs:[['legraise','cablecrunch','dragonflag','lsit','platecrunch']]},
-  {id:'a_brace',name:'Abs: bracing',mode:'rot',subs:[['abroll','pallof','hollow']]}
+  {id:'a_flex',name:'Abs: flexion',mode:'rot',subs:[['legraise','cablecrunch','dragonflag','lsit','platecrunch','crunchmach','hangknee','vup']]},
+  {id:'a_brace',name:'Abs: bracing',mode:'rot',subs:[['abroll','pallof','hollow','deadbug','sideplank','suitcase']]}
  ]
 };
 var SLOT_OF={};
@@ -981,20 +1040,55 @@ function warmText(d,sg){
   return out.length?'Warm-up: '+out.join(', ')+(d.perHand?' (kg each).':' (kg).'):'';
 }
 function addPanel(day){
-  var inT={},h='<div class="card" id="addpanel"><div class="cardhead"><span class="lab">Add an exercise for today</span><button class="link" data-act="addopen">Close</button></div>';
+  var inT={},q=S.ui.addQ||'',h='<div class="card" id="addpanel"><div class="cardhead"><span class="lab">Add an exercise for today</span><button class="link" data-act="addopen">Close</button></div>'+
+   '<input class="in" id="addq" type="search" placeholder="Search exercises" autocomplete="off" autocorrect="off" spellcheck="false" style="font-size:var(--s2)" value="'+esc(q)+'">';
   Object.keys(S.ui._todayKeys||{}).forEach(function(k){inT[k]=1});Object.keys(S.ui._todayIds||{}).forEach(function(k){inT[k]=1});
   function grp(name,ids){
     var L=ids.map(defOf).filter(function(d){return d&&!inT[d.id]});if(!L.length)return '';
-    return '<div><span class="lab">'+esc(name)+'</span><div class="chips" style="margin-top:6px">'+L.map(function(d){return '<button class="chip" data-act="addex" data-v="'+d.id+'">+ '+esc(d.name)+'</button>'}).join('')+'</div></div>';
+    return '<div class="agrp"><span class="lab">'+esc(name)+'</span><div class="chips" style="margin-top:6px">'+L.map(function(d){return '<button class="chip" data-act="addex" data-v="'+d.id+'" data-q="'+esc(srchKey(d,name))+'">+ '+esc(d.name)+'</button>'}).join('')+'</div></div>';
   }
   function dayBlock(dy){
     var r='';SLOTS[dy].forEach(function(sl){r+=grp(sl.name,[].concat.apply([],sl.subs))});
     return r+grp('Extra',defs().filter(function(d){return d.day===dy&&!SLOT_OF[d.id]}).map(function(d){return d.id}));
   }
-  h+=dayBlock(day)+dayBlock('abs');
-  if(S.ui.addAll)DAYS.forEach(function(dy){if(dy!==day)h+='<h3 style="margin-top:8px">From '+dy+' day</h3>'+dayBlock(dy)});
-  else h+='<button class="link" data-act="addall" style="align-self:flex-start">Show exercises from other days</button>';
+  h+='<div class="aday" data-home="1">'+dayBlock(day)+dayBlock('abs')+'</div>';
+  DAYS.forEach(function(dy){if(dy!==day)h+='<div class="aday" data-home="0"><h3 style="margin-top:8px">From '+dy+' day</h3>'+dayBlock(dy)+'</div>'});
+  h+='<div class="small mute" id="addnone" hidden>Nothing matches. Check the spelling, or add it as a new exercise in Setup.</div>';
+  h+='<button class="link" data-act="addall" id="addallbtn" style="align-self:flex-start">Show exercises from other days</button>';
   return h+'</div>';
+}
+// Search matches the name, the muscle group and the day, so "biceps", "chest" or "calf" all work.
+function srchKey(d,grp){return (d.name+' '+(grp||'')+' '+d.day).toLowerCase()}
+function srchMatch(key,q){q=q.toLowerCase().trim();if(!q)return true;return q.split(/\s+/).every(function(w){return key.indexOf(w)>=0||key.indexOf(w.replace(/s$/,''))>=0})}
+function filterSetup(){
+  var inp=document.getElementById('setq');if(!inp)return;
+  var q=inp.value||'',any=false;S.ui.setQ=q;
+  document.querySelectorAll('.sday').forEach(function(card){
+    if(!card.querySelector('.ex')){card.hidden=!!q.trim();return}
+    var n=0;
+    card.querySelectorAll('.sgrp').forEach(function(g){
+      var k=0;g.querySelectorAll('.ex').forEach(function(e){var m=srchMatch(e.getAttribute('data-q'),q);e.hidden=!m;if(m)k++});
+      g.hidden=!k;n+=k;
+      g.querySelectorAll('.subhd').forEach(function(sh){sh.hidden=!!q.trim()});
+    });
+    card.hidden=!n;if(n)any=true;
+  });
+  document.querySelectorAll('#app>.card:not(.sday)').forEach(function(c){c.hidden=!!q.trim()});
+  var nn=document.getElementById('setnone');if(nn)nn.hidden=any||!q.trim();
+}
+function filterAdd(){
+  var box=document.getElementById('addpanel');if(!box)return;
+  var q=(document.getElementById('addq')||{}).value||'',any=false;S.ui.addQ=q;
+  box.querySelectorAll('.aday').forEach(function(dv){
+    var home=dv.getAttribute('data-home')==='1',vis=0;
+    dv.querySelectorAll('.agrp').forEach(function(g){
+      var n=0;g.querySelectorAll('.chip').forEach(function(c){var m=srchMatch(c.getAttribute('data-q'),q);c.hidden=!m;if(m)n++});
+      g.hidden=!n;vis+=n;
+    });
+    var show=q.trim()?vis>0:(home||S.ui.addAll);dv.hidden=!show;if(show&&vis)any=true;
+  });
+  var nn=document.getElementById('addnone');if(nn)nn.hidden=any;
+  var ab=document.getElementById('addallbtn');if(ab)ab.hidden=!!q.trim()||!!S.ui.addAll;
 }
 function targetHtml(d,sg){
   if(d.kind==='skill')return '<div class="reason">'+esc(sg.text)+'</div>';
@@ -1107,10 +1201,10 @@ function viewProgress(){
   return h;
 }
 function viewSetup(){
-  var h='<h2>Setup</h2><div class="card"><div class="grid2"><div class="field"><label class="lab" for="goal">Sessions per week</label><input class="in" id="goal" data-cfg="goal" inputmode="numeric" value="'+(S.cfg.goal||3)+'"></div><div class="field"><label class="lab" for="mins">Session length (min)</label><input class="in" id="mins" data-cfg="mins" inputmode="numeric" value="'+(S.cfg.mins||60)+'"></div></div></div>';
-  function exRow(d){
+  var h='<h2>Setup</h2><input class="in" id="setq" type="search" placeholder="Search exercises" autocomplete="off" autocorrect="off" spellcheck="false" style="font-size:var(--s2)" value="'+esc(S.ui.setQ||'')+'"><div class="small mute" id="setnone" hidden>Nothing matches. Add it as a new exercise below.</div><div class="card sday"><div class="grid2"><div class="field"><label class="lab" for="goal">Sessions per week</label><input class="in" id="goal" data-cfg="goal" inputmode="numeric" value="'+(S.cfg.goal||3)+'"></div><div class="field"><label class="lab" for="mins">Session length (min)</label><input class="in" id="mins" data-cfg="mins" inputmode="numeric" value="'+(S.cfg.mins||60)+'"></div></div></div>';
+  function exRow(d,gn){
     var op=!!(S.ui.open||{})[d.id],r='';
-    r+='<div class="ex"><div class="exhead"><button class="exname" data-act="exopen" data-v="'+d.id+'" aria-expanded="'+op+'">'+esc(d.name)+' <span class="mute">'+(op?'−':'+')+'</span></button><label class="toggle"><input type="checkbox" data-act="active" data-id="'+d.id+'" '+(isActive(d)?'checked':'')+'> In rotation</label></div>';
+    r+='<div class="ex" data-q="'+esc(srchKey(d,gn||'extra'))+'"><div class="exhead"><button class="exname" data-act="exopen" data-v="'+d.id+'" aria-expanded="'+op+'">'+esc(d.name)+' <span class="mute">'+(op?'−':'+')+'</span></button><label class="toggle"><input type="checkbox" data-act="active" data-id="'+d.id+'" '+(isActive(d)?'checked':'')+'> In rotation</label></div>';
     if(!op)return r+'</div>';
     r+='<div class="exbody">'+(d.note?'<div class="small mute">'+esc(d.note)+'</div>':'')+'<div class="grid4" style="margin-top:8px">';
     if(d.kind!=='skill'){
@@ -1121,18 +1215,18 @@ function viewSetup(){
     return r;
   }
   function slotBlock(sl){
-    var r='<div style="margin-top:14px"><span class="lab">'+esc(sl.name)+'</span><div class="small mute">'+(sl.subs.length>1?'Alternates between the two groups below. ':'')+(sl.mode==='fixed'?'Uses the first ticked exercise every session.':'Ticked exercises take turns.')+' Unticked ones come up through Swap and Shuffle.</div></div>';
-    sl.subs.forEach(function(sub,si){if(sl.subs.length>1)r+='<div class="small" style="margin-top:6px;font-weight:600">'+(si===0?'Glutes':'Knees, calves & groin')+'</div>';sub.forEach(function(id){var d=defOf(id);if(d)r+=exRow(d)})});
-    return r;
+    var r='<div class="sgrp"><div style="margin-top:14px"><span class="lab">'+esc(sl.name)+'</span><div class="small mute">'+(sl.subs.length>1?'Alternates between the two groups below. ':'')+(sl.mode==='fixed'?'Uses the first ticked exercise every session.':'Ticked exercises take turns.')+' Unticked ones come up through Swap and Shuffle.</div></div>';
+    sl.subs.forEach(function(sub,si){if(sl.subs.length>1)r+='<div class="small subhd" style="margin-top:6px;font-weight:600">'+(si===0?'Glutes':'Knees, calves & groin')+'</div>';sub.forEach(function(id){var d=defOf(id);if(d)r+=exRow(d,sl.name)})});
+    return r+'</div>';
   }
   DAYS.forEach(function(day){
-    h+='<div class="card"><h3>'+day[0].toUpperCase()+day.slice(1)+'</h3>';
+    h+='<div class="card sday"><h3>'+day[0].toUpperCase()+day.slice(1)+'</h3>';
     SLOTS[day].forEach(function(sl){h+=slotBlock(sl)});
     var other=defs().filter(function(d){return d.day===day&&!SLOT_OF[d.id]});
-    if(other.length){h+='<div style="margin-top:14px"><span class="lab">Extra</span><div class="small mute">Ticked ones are added to every '+day+' session.</div></div>';other.forEach(function(d){h+=exRow(d)})}
+    if(other.length){h+='<div class="sgrp"><div style="margin-top:14px"><span class="lab">Extra</span><div class="small mute">Ticked ones are added to every '+day+' session.</div></div>';other.forEach(function(d){h+=exRow(d,'extra')});h+='</div>'}
     h+='</div>';
   });
-  h+='<div class="card"><h3>Abs</h3><div class="small mute">A two-exercise ab circuit at the end of a session, at least once a week and sometimes twice, picked at random. You can add or skip it on the day.</div>';
+  h+='<div class="card sday"><h3>Abs</h3><div class="small mute">A two-exercise ab circuit at the end of a session, at least once a week and sometimes twice, picked at random. You can add or skip it on the day.</div>';
   SLOTS.abs.forEach(function(sl){h+=slotBlock(sl)});
   h+='</div>';
   h+='<div class="card"><h3>Add an exercise</h3><div class="grid2"><div class="field"><label class="lab" for="cn">Name</label><input class="in" id="cn" placeholder="Chin-ups"></div><div class="field"><label class="lab" for="cd">Day</label><select class="in" id="cd"><option value="push">Push</option><option value="pull">Pull</option><option value="legs">Legs</option></select></div></div><div class="grid4"><div class="field"><label class="lab" for="ck">Type</label><select class="in" id="ck"><option value="load">Weighted</option><option value="reps">Reps only</option></select></div><div class="field"><label class="lab" for="cs">Sets</label><input class="in" id="cs" inputmode="numeric" value="3"></div><div class="field"><label class="lab" for="cl">Min reps</label><input class="in" id="cl" inputmode="numeric" value="5"></div><div class="field"><label class="lab" for="ch">Max reps</label><input class="in" id="ch" inputmode="numeric" value="8"></div></div><div class="grid2"><div class="field"><label class="lab" for="ci">Step (kg)</label><input class="in" id="ci" inputmode="decimal" value="2.5"></div><label class="row small" style="align-self:end"><input type="checkbox" id="ca"> Weight is added to bodyweight</label></div><button class="btn" data-act="addcustom">Add exercise</button></div>';
@@ -1261,6 +1355,7 @@ function render(){
   var head='<div class="top"><h1 class="brand"><span class="z">Z</span>/LOG</h1><div class="status" id="status">'+esc(S.ui.status)+'</div></div>';
   var body=S.ui.tab==='log'?viewLog():S.ui.tab==='history'?viewHistory():S.ui.tab==='progress'?viewProgress():viewSetup();
   app.innerHTML=head+body;
+  filterAdd();filterSetup();
   document.querySelectorAll('#bar button').forEach(function(b){if(b.getAttribute('data-v')===S.ui.tab)b.setAttribute('aria-current','page');else b.removeAttribute('aria-current')});
 }
 function toast(m){var t=document.getElementById('toast');t.textContent=m;t.hidden=false;clearTimeout(toast._t);toast._t=setTimeout(function(){t.hidden=true},2800)}
@@ -1379,12 +1474,12 @@ document.addEventListener('click',function(ev){
     toast(alt===v?'Back to '+defOf(v).name+'.':defOf(alt).name+' in place of '+defOf(v).name+' today.');
   }
   else if(a==='addex'){
-    saveDraftNow();S.ui.extra=S.ui.extra||{};S.ui.extra[v]=true;if(S.ui.removed)delete S.ui.removed[v];S.ui.addOpen=false;saveDraftNow();render();
+    saveDraftNow();S.ui.extra=S.ui.extra||{};S.ui.extra[v]=true;if(S.ui.removed)delete S.ui.removed[v];S.ui.addOpen=false;S.ui.addQ='';saveDraftNow();render();
     var nc=document.querySelector('.card[data-ex="'+v+'"]');
     if(nc){window.scrollTo(0,Math.max(0,window.scrollY+nc.getBoundingClientRect().top-90));toast((defOf(v)||{}).name+' added for today.')}
   }
-  else if(a==='addopen'){saveDraftNow();S.ui.addOpen=!S.ui.addOpen;S.ui.addAll=false;var sy12=window.scrollY;render();window.scrollTo(0,sy12)}
-  else if(a==='addall'){saveDraftNow();S.ui.addAll=true;var sy13=window.scrollY;render();window.scrollTo(0,sy13)}
+  else if(a==='addopen'){saveDraftNow();S.ui.addOpen=!S.ui.addOpen;S.ui.addAll=false;S.ui.addQ='';var sy12=window.scrollY;render();window.scrollTo(0,sy12)}
+  else if(a==='addall'){S.ui.addAll=true;filterAdd()}
   else if(a==='rem'){
     saveDraftNow();S.ui.extra=S.ui.extra||{};S.ui.removed=S.ui.removed||{};S.ui.swapOpen=null;
     var rn=(defOf((S.ui.swaps||{})[v]||v)||{}).name||'Exercise';
@@ -1456,6 +1551,8 @@ document.addEventListener('change',function(ev){
 });
 document.addEventListener('focusin',function(ev){var t=ev.target;if(t&&t.matches&&t.matches('input.in:not([type=date])')&&t.value){setTimeout(function(){try{t.select()}catch(e){}},0)}});
 document.addEventListener('input',function(ev){
+  if(ev.target.id==='addq'){filterAdd();return}
+  if(ev.target.id==='setq'){filterSetup();return}
   if(ev.target.closest('.card[data-ex]')){S.ui.dirty=true;saveDraft()}
 });
 
